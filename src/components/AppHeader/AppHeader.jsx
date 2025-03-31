@@ -18,8 +18,7 @@ export default function AppHeader() {
                     </li>
 
                     <li>
-                        <NavLink to="/movies" className={getLinkStyles}>
-
+                        <NavLink to="/movies" className={getLinkStyles}> Movies
                         </NavLink>
                     </li>
                 </ul>

@@ -5,7 +5,7 @@ export default function NotFoundPage() {
         <div>
             <p>
                 404 Not Found this page! Please follow this {''}
-                <Link to="/movies">link</Link>
+                <Link to="/">link</Link>
             </p>
         </div>
     );

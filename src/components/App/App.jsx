@@ -4,7 +4,13 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import AppHeader from '../AppHeader/AppHeader';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import HomePage from '../../pages/HomePage/HomePage'
+import HomePage from '../../pages/HomePage/HomePage';
+// import MoviePage from '../../pages/MoviePage/MoviePage';
+import MovieDetailsPage from '../../pages/MovieDetailPage/MovieDetailPage';
+// import MovieReviews from '../MovieReview/MovieReview';
+// import MovieCast from '../MovieCast/MovieCast';
+
+
 
 export default function App() {
   return (
@@ -13,8 +19,8 @@ export default function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        {/* <Route path="/movies" element={<MoviePage />} />
-        <Route path="movis/:movieId" element={<MovieDetailsPage />}>
+        <Route path="/movies" element={<MovieDetailsPage />} />
+        {/* <Route path="movis/:movieId" element={<MovieDetailsPage />}>
           <Route path="cast" element={<MovieCast />} />
           <Route path="reviews" element={<MovieReviews />} />
         </Route> */}
