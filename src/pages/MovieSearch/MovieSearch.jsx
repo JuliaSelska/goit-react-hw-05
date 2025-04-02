@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import { useSearchParams } from 'react-router';
-import { searchMovie } from '../../movieServise';
+import { searchMovie } from '../../movieList';
 import MovieList from '../../components/MovieList/MovieList';
 import styles from '../MovieSearch/MovieSearch.module.css'
 

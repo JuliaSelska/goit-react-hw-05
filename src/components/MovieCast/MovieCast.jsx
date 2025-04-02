@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getMovieCredits } from '..//../movieServise';
+import { getMovieCredits } from '../../movieList';
 import styles from '../MovieCast/MovieCast.module.css';
 
 

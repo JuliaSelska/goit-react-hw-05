@@ -1,4 +1,4 @@
-import { getMovieReviews } from '..//../movieServise';
+import { getMovieReviews } from '../../movieList';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 

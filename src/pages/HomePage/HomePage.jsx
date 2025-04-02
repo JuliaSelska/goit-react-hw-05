@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getTrendingMovies } from '../../movieServise'
+import { getTrendingMovies } from '../../movieList'
 import MovieList from "../../components/MovieList/MovieList";
 import styles from '../HomePage/HomePage.module.css'
 

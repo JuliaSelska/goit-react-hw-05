@@ -1,30 +1,40 @@
 import { useState } from 'react'
+import { Suspense, lazy } from 'react';
 import { Route, Routes } from 'react-router';
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
 import AppHeader from '../AppHeader/AppHeader';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import HomePage from '../../pages/HomePage/HomePage';
-import MoviePage from '../../pages/MovieSearch/MovieSearch';
-import MovieDetailsPage from '../../pages/MovieDetailPage/MovieDetailPage';
-import MovieReviews from '../MovieReview/MovieReview';
-import MovieCast from '../MovieCast/MovieCast';
+import Navigation from '../Navigation/Navigation';
+// import HomePage from '../../pages/HomePage/HomePage';
+// import MovieSearch from '../../pages/MovieSearch/MovieSearch';
+// import MovieDetailsPage from '../../pages/MovieDetailPage/MovieDetailPage';
+// import MovieReviews from '../MovieReview/MovieReview';
+// import MovieCast from '../MovieCast/MovieCast';
 
-
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const MoviesPage = lazy(() => import('../../pages/MoviesPage/MoviesPage'));
+const MovieDetailsPage = lazy(() => import('../../pages/MovieDetailPage/MovieDetailPage'));
+const MovieCast = lazy(() => import('../MovieCast/MovieCast'));
+const MovieReviews = lazy(() => import('../MovieReview/MovieReview'));
 
 export default function App() {
   return (
     <div>
       <AppHeader />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviePage />} />
-        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<MovieCast />} />
-          <Route path="reviews" element={<MovieReviews />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Navigation />
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="reviews" element={<MovieReviews />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+
+      </Suspense>
+
     </div>
   );
 }
@@ -42,34 +52,3 @@ export default function App() {
 
 
 
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <div>
-//         <a href="https://vite.dev" target="_blank">
-//           <img src={viteLogo} className="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} className="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
-// }
-
-// export default App
