@@ -90,3 +90,21 @@ export const getMovieReviews = async (movieId) => {
         throw error;
     }
 };
+
+export const getMoviesList = async (page = 1) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/trending/movie/day`, {
+            params: {
+                page,
+                include_adult: false,
+                language: "en-US",
+            },
+            ...getHeaders(),
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching movies:", error);
+        throw error;
+    }
+};

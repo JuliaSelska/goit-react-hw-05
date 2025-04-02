@@ -21,7 +21,7 @@ export default function App() {
   return (
     <div>
       <AppHeader />
-      <Navigation />
+      {/* <Navigation /> */}
       <Suspense>
         <Routes>
           <Route path="/" element={<HomePage />} />
