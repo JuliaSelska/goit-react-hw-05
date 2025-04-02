@@ -5,29 +5,27 @@ import './App.css'
 import AppHeader from '../AppHeader/AppHeader';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import HomePage from '../../pages/HomePage/HomePage';
-// import MoviePage from '../../pages/MoviePage/MoviePage';
+import MoviePage from '../../pages/MovieSearch/MovieSearch';
 import MovieDetailsPage from '../../pages/MovieDetailPage/MovieDetailPage';
-// import MovieReviews from '../MovieReview/MovieReview';
-// import MovieCast from '../MovieCast/MovieCast';
+import MovieReviews from '../MovieReview/MovieReview';
+import MovieCast from '../MovieCast/MovieCast';
 
 
 
 export default function App() {
   return (
-    <div className={CSS.container}>
+    <div>
       <AppHeader />
-
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MovieDetailsPage />} />
-        {/* <Route path="movis/:movieId" element={<MovieDetailsPage />}>
+        <Route path="/movies" element={<MoviePage />} />
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
           <Route path="cast" element={<MovieCast />} />
           <Route path="reviews" element={<MovieReviews />} />
-        </Route> */}
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
-
   );
 }
 

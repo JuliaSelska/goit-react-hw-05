@@ -4,34 +4,45 @@ import { useParams } from 'react-router';
 
 
 export default function MovieReviews() {
-
     const { movieId } = useParams();
-    const [review, setReview] = useState([]);
+
+    const [feedbacks, setfeedbacks] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
-        async function getReview() {
-            const data = await getMovieReviews(movieId)
-            setReview(data);
+        async function getFeedbacks() {
+            try {
+                setIsLoading(true);
+                setError(false);
+                const data = await getMovieReviews(movieId);
+                setfeedbacks(data);
+            } catch {
+                setError(true);
+            } finally {
+                setIsLoading(false);
+            }
         }
 
-        getReview();
-    }, [movieId])
+        getFeedbacks();
+    }, [movieId]);
 
     return (
-        <div >
-            <h2 >Reviews</h2>
-            <ul className={styles.list}>
-                {review.map((review) => (
-                    <li
-                        key={review.id}
-                        className={
-                            review.completed ? styles.completed : styles.pending
-                        }
-                    >
-                        {review.review}
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            {isLoading && <b>Loading...</b>}
+            {error && <b>Whoops there was a problem, please reloade this page!</b>}
+            <div >
+                {feedbacks.length ? (
+                    feedbacks.map((review) => (
+                        <div key={review.id}>
+                            <h3 >{review.author}</h3>
+                            <p >{review.content}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>There are no avaialble reviews at the moment.</p>
+                )}
+            </div>
+        </>
     );
 }

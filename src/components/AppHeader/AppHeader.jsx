@@ -3,18 +3,16 @@ import clsx from 'clsx';
 import css from '../AppHeader/AppHeader.module.css';
 
 const getLinkStyles = ({ isActive }) => {
-    return clsx(css.link, isActive && css.active
-
-    );
+    return clsx(css.link, isActive && css.active);
 }
 
 export default function AppHeader() {
     return (
-        <header className={css.header}>
+        <header className={css.headerBar}>
             <nav className={css.nav}>
                 <ul className={css.list}>
                     <li>
-                        <NavLink to="/" className={getLinkStyles}>Home</NavLink>
+                        <NavLink to="/" className={getLinkStyles} >Home</NavLink>
                     </li>
 
                     <li>

@@ -1,7 +1,10 @@
 import css from '../MovieInfo/MovieInfo.module.css';
 
 export default function MovieInfo({ movie }) {
-    const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";  // Базовий URL для зображень
+
+    if (!movie) return null;
+
+    const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
     return (
         <div>
             <img
@@ -11,11 +14,11 @@ export default function MovieInfo({ movie }) {
             />
             <div>
                 <h2>{movie.title}</h2>
-                <p><strong>User score:</strong> {movie.vote_average * 10}%</p> {/* Відображення рейтингу */}
+                <p><strong>User score:</strong> {movie.vote_average * 10}%</p>
                 <h2>Overview</h2>
                 <p>{movie.overview}</p>
                 <h2>Genres</h2>
-                <p>{movie.genres.map(genre => genre.name).join(', ')}</p> {/* Перетворення масиву жанрів у текст */}
+                <p>{movie.genres.map(genre => genre.name).join(', ')}</p>
             </div>
         </div>
     );

@@ -1,33 +1,54 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { getMovieCredits } from '..//../movieServise'
+import { getMovieCredits } from '..//../movieServise';
+import styles from '../MovieCast/MovieCast.module.css';
 
 
 export default function MovieCast() {
     const { movieId } = useParams();
-    const [cast, setCast] = useState([]);
+
+    const [casts, setCasts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     useEffect(() => {
         async function getCast() {
-            const data = await getMovieCredits(movieId);
-            setCast(data);
+            try {
+                setIsLoading(true);
+                setError(false);
+                const data = await getMovieCredits(movieId);
+                setCasts(data);
+            } catch {
+                setError(true);
+            } finally {
+                setIsLoading(false);
+            }
         }
-
         getCast();
     }, [movieId]);
 
     return (
-        <div>
-            <h3>Cast</h3>
-            {cast.length > 0 &&
-                cast.map((cast) => (
-                    <div key={movieId.id}>
-                        <img src={avatar} alt={description} />
-                        <h3>{firstName}</h3>
-                        <p>Character: {character}</p>
-                    </div>
-                ))}
+        <div className={styles.containerCast} >
+            {isLoading && <b>Loading...</b>}
+            {error && <b>Wooops there was a problem, please reload this page!</b>}
+            <ul className={styles.listCast} >
+                {casts.map((cast) => (
+                    <li key={cast.id} className={styles.itemCast}>
+                        <img
+                            className={styles.imgCast}
+                            src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                            alt={cast.name}
 
+                        />
+                        <p className={styles.textCast}>
+                            {cast.name}
+                        </p>
+                        <p className={styles.textCast}>
+                            Character: {cast.character}
+                        </p>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }

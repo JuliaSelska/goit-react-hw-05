@@ -1,16 +1,31 @@
-.header {
+.headerBar {
+    width: 100%;
+    max-width: 1600px;
+    height: 60px;
+    background-color: #6f7ed6;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 12px 0;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #2a2a2a;
-    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
 }
+
+
 
 .nav {
     background-color: #f8f9fa;
-    padding: 10px 20px;
+    padding: 12px 66px;
+    border-radius: 12px;
+}
+
+.navHome {
+    background-color: #f8f9fa;
+    padding: 12px 66px;
+    border-radius: 12px;
 }
 
 .list {
@@ -23,7 +38,7 @@
 
 .link {
     text-decoration: none;
-    color: #333;
+    color: #f0dc26;
     font-weight: 500;
     transition: color 0.2s ease-in-out;
 }

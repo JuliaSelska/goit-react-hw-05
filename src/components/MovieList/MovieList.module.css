@@ -1,0 +1,21 @@
+.movieList {
+    list-style: none;
+    padding: 0;
+}
+
+
+.movieItem a {
+    font-size: 18px;
+    text-decoration: none;
+    color: #2a5db0;
+    /* Синій */
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.movieItem a:hover {
+    color: #f0dc26;
+    /* Помаранчевий для акценту */
+    transform: scale(1.1);
+    font-weight: bold;
+}
