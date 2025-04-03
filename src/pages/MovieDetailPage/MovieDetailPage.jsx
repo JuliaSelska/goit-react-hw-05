@@ -11,7 +11,7 @@ export default function MovieDetailsPage() {
     const [error, setError] = useState(false);
 
     const location = useLocation();
-    const backLinkHref = location.state?.from || '/movies';
+    const backLinkHref = useRef(location.state?.from || '/movies')
 
     useEffect(() => {
         async function fetchMovie() {
@@ -35,7 +35,8 @@ export default function MovieDetailsPage() {
 
     return (
         <div className={styles.container}>
-            <NavLink to={backLinkHref} className={styles.goBack}>← Go back</NavLink>
+            <NavLink to={backLinkHref.current} className={styles.goBack}>← Go back</NavLink>
+            {/* <NavLink to={backLinkHref} className={styles.goBack}>← Go back</NavLink> */}
 
             <div className={styles.movieWrapper}>
                 <img
