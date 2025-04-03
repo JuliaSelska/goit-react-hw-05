@@ -1,20 +1,54 @@
-.nav {
+.headerBar {
+    width: 100%;
+    max-width: 1600px;
+    height: 60px;
+    background-color: #6f7ed6;
     display: flex;
-    gap: 20px;
-    padding: 10px;
-    background-color: #2c3e50;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+
+
+.nav {
+    background-color: #f8f9fa;
+    padding: 12px 66px;
+    border-radius: 12px;
+}
+
+.navHome {
+    background-color: #f8f9fa;
+    padding: 12px 66px;
+    border-radius: 12px;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
 }
 
 .link {
-    color: white;
     text-decoration: none;
-    font-size: 18px;
-    padding: 5px 10px;
-    border-radius: 5px;
+    color: #f0dc26;
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
 }
 
-.activeLink {
-    background-color: #3498db;
-    color: white;
-    font-weight: bold;
+.link:hover {
+    color: #007bff;
+}
+
+.active {
+    color: #007bff;
+    font-weight: 600;
+    border-bottom: 2px solid #007bff;
 }

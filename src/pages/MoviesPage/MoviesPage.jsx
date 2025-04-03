@@ -1,46 +1,54 @@
-import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { getMoviesList } from '../../movieList'; // Функція для отримання списку фільмів
-import styles from './MoviesPage.module.css';
+import { useEffect, useState } from 'react';
+import { useDebounce } from 'use-debounce';
+import { useSearchParams } from 'react-router';
+import { searchMovie } from '../../movieList';
+import MovieList from '../../components/MovieList/MovieList';
+import styles from '../../pages/MoviesPage/MoviesPage.module.css'
 
-export default function MoviesPage() {
+export default function MovieSearch() {
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const location = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const query = searchParams.get("query") ?? "";
+
+    const [debounceQuery] = useDebounce(query, 300);
+
+    const changeSearchMovie = (event) => {
+        const nextParams = new URLSearchParams(searchParams);
+        if (event.target.value !== '') {
+            nextParams.set('query', event.target.value.trim());
+        } else {
+            nextParams.delete('query');
+        }
+        setSearchParams(nextParams);
+    };
+
 
     useEffect(() => {
-        async function fetchMovies() {
+        if (!debounceQuery) return;
+        async function getMovies() {
             try {
                 setIsLoading(true);
                 setError(false);
-                const data = await getMoviesList(); // Отримання списку фільмів
-                setMovies(data.results);
+                const data = await searchMovie(debounceQuery);
+                setMovies(data);
             } catch {
                 setError(true);
             } finally {
                 setIsLoading(false);
             }
         }
-        fetchMovies();
-    }, []);
-
-    if (isLoading) return <b className={styles.loading}>Loading movies...</b>;
-    if (error) return <b className={styles.error}>Error loading movies. Try again!</b>;
+        getMovies();
+    }, [debounceQuery]);
 
     return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>Movies</h1>
-            <ul className={styles.list}>
-                {movies.map(movie => (
-                    <li key={movie.id} className={styles.item}>
-                        <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-                            {movie.title}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <input type="text" value={query} onChange={changeSearchMovie} className={styles.searchInput} />
+            {isLoading && <b>Loading movies...</b>}
+            {error && <b>Whooops there was an error, please reload this page!</b>}
+            {movies.length > 0 ? <MovieList movies={movies} /> : <p><strong>No movies found yet</strong></p>}
+        </>
     );
 }
